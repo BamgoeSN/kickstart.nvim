@@ -202,6 +202,10 @@ require('lazy').setup({
         component_separators = '|',
         section_separators = '',
       },
+      sections = {
+        lualine_y = { 'progress', 'location' },
+        lualine_z = { { 'datetime', style = '%y/%m/%d %H:%M:%S' } },
+      },
     },
   },
 
