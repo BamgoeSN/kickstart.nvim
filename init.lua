@@ -6,9 +6,6 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- Enable line numbers in netrw
-vim.g.netrw_bufsettings = 'noma nomod nu rnu nobl nowrap ro'
-
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -344,6 +341,9 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
+
+-- Enable line numbers in netrw
+vim.g.netrw_bufsettings = 'noma nomod nu rnu nobl nowrap ro'
 
 -- [[ Basic Keymaps ]]
 
