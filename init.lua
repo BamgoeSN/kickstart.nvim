@@ -188,6 +188,9 @@ require('lazy').setup({
     end,
   },
 
+  -- Rainbow delimiters and indents
+  "hiphish/rainbow-delimiters.nvim",
+
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
