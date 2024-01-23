@@ -359,6 +359,10 @@ vim.keymap.set({ 'n', 'i', 'v' }, '<C-s>', ':w<CR>', { silent = true })
 -- Switch between buffers
 vim.keymap.set('n', '<leader>bn', '<cmd>bnext<CR>', { desc = '[B]uffer [N]ext', silent = true })
 vim.keymap.set('n', '<leader>bp', '<cmd>bnext<CR>', { desc = '[B]uffer [P]revious', silent = true })
+vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'Left window', silent = true })
+vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'Upper window', silent = true })
+vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Lower window', silent = true })
+vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Right window', silent = true })
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
