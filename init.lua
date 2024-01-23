@@ -364,6 +364,13 @@ vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'Upper window', silent = true })
 vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Lower window', silent = true })
 vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Right window', silent = true })
 
+-- Terminal
+vim.keymap.set({ 'n', 'v' }, '<leader>tv', '<cmd>vsp<cr> <C-w><C-l> <cmd>terminal<cr> i',
+  { desc = '[T]erminal as [V]ertical split' })
+vim.keymap.set({ 'n', 'v' }, '<leader>th', '<cmd>split<cr> <C-w><C-j> <cmd>terminal<cr> i',
+  { desc = '[T]erminal as [H]orizontal split' })
+vim.keymap.set('t', '<esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode', silent = true })
+
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
