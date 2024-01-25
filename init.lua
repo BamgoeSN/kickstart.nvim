@@ -191,12 +191,12 @@ require('lazy').setup({
       options = {
         icons_enabled = true,
         theme = 'nord',
-        component_separators = '|',
-        section_separators = '',
+        component_separators = { left = '\\', right = '/' },
+        section_separators = { left = '', right = '' },
       },
       sections = {
         lualine_y = { 'progress', 'location' },
-        lualine_z = { { 'datetime', style = '%y/%m/%d %H:%M:%S' } },
+        lualine_z = { { 'datetime', style = '%Y/%m/%d %H:%M:%S' } },
       },
     },
   },
@@ -648,7 +648,7 @@ local servers = {
     },
   },
 
-  pyright = {},
+  ruff_lsp = {},
 
   rust_analyzer = {
     settings = {
