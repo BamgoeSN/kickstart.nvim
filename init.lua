@@ -187,7 +187,7 @@ require('lazy').setup({
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
-    event = 'TextChanged',
+    event = { 'TextChanged', 'ModeChanged' },
     opts = {
       options = {
         icons_enabled = true,
