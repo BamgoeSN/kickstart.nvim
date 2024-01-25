@@ -240,12 +240,12 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
+      -- Display context
+      'nvim-treesitter/nvim-treesitter-context',
     },
     build = ':TSUpdate',
   },
 
-  -- Display context
-  'nvim-treesitter/nvim-treesitter-context',
 
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
