@@ -187,6 +187,7 @@ require('lazy').setup({
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
+    event = 'TextChanged',
     opts = {
       options = {
         icons_enabled = true,
@@ -242,6 +243,9 @@ require('lazy').setup({
     },
     build = ':TSUpdate',
   },
+
+  -- Display context
+  'nvim-treesitter/nvim-treesitter-context',
 
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
