@@ -49,10 +49,10 @@ require('lazy').setup({
   'tpope/vim-sleuth',
 
   -- LSP
-  require 'kickstart.plugins.lsp',
+  require 'bamgoe.plugins.lsp',
 
   -- Autocompletion
-  require 'kickstart.plugins.cmp',
+  require 'bamgoe.plugins.cmp',
 
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim',  opts = {} },
@@ -181,7 +181,7 @@ require('lazy').setup({
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
-  require 'kickstart.plugins.telescope',
+  require 'bamgoe.plugins.telescope',
 
   {
     -- Highlight, edit, and navigate code
@@ -199,8 +199,8 @@ require('lazy').setup({
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
-  -- require 'kickstart.plugins.autoformat',
-  require 'kickstart.plugins.debug',
+  -- require 'bamgoe.plugins.autoformat',
+  require 'bamgoe.plugins.debug',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
