@@ -23,8 +23,6 @@ return {
     'hrsh7th/cmp-path',
   },
   config = function()
-    -- [[ Configure nvim-cmp ]]
-    -- See `:help cmp`
     local cmp = require 'cmp'
     local luasnip = require 'luasnip'
     require('luasnip.loaders.from_vscode').lazy_load({
@@ -33,6 +31,7 @@ return {
     luasnip.config.setup {}
 
     cmp.setup {
+      preselect = cmp.PreselectMode.None,
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
