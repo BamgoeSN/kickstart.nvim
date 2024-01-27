@@ -166,6 +166,14 @@ require('lazy').setup({
     },
   },
 
+  -- Transparent background
+  {
+    'xiyaowong/transparent.nvim',
+    config = function()
+      vim.cmd(':TransparentEnable')
+    end
+  },
+
   -- -- Rainbow delimiters and indents
   -- "hiphish/rainbow-delimiters.nvim",
 
