@@ -314,6 +314,14 @@ vim.o.termguicolors = true
 -- Enable line numbers in netrw
 vim.g.netrw_bufsettings = 'noma nomod nu rnu nobl nowrap ro'
 
+-- Use Powershell as a default shell on Windows
+if vim.loop.os_uname().sysname == 'Windows_NT' then
+  vim.o.shell = 'pwsh'
+  vim.o.shellcmdflag = '-command'
+  vim.o.shellquote = '\"'
+  vim.o.shellxquote = ''
+end
+
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
