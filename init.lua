@@ -463,6 +463,7 @@ if vim.g.neovide then
   vim.g.neovide_cursor_trail_size = 0.5
   vim.g.neovide_cursor_vfx_mode = "torpedo"
   vim.g.neovide_cursor_vfx_particle_density = 10.0
+  vim.g.neovide_transparency = 0.85
 
   -- Disable IME when not in insert mode
   local function set_ime(args)
