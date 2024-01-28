@@ -269,6 +269,16 @@ require('lazy').setup({
   },
 }, {})
 
+-- [[ Utility funcitons ]]
+local function is_on_windows_or_wsl()
+  if vim.loop.os_uname().sysname == 'Windows_NT' then return true end
+  local f = io.open("/proc/version", "rb")
+  if not f then return false end
+  local content = f:read("*a")
+  f:close()
+  return content:find("WSL") ~= nil
+end
+
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
@@ -315,7 +325,7 @@ vim.o.termguicolors = true
 vim.g.netrw_bufsettings = 'noma nomod nu rnu nobl nowrap ro'
 
 -- Use Powershell as a default shell on Windows
-if vim.loop.os_uname().sysname == 'Windows_NT' then
+if is_on_windows_or_wsl() then
   vim.o.shell = 'pwsh'
   vim.o.shellcmdflag = '-command'
   vim.o.shellquote = '\"'
@@ -463,7 +473,12 @@ if vim.g.neovide then
   vim.g.neovide_cursor_trail_size = 0.5
   vim.g.neovide_cursor_vfx_mode = "torpedo"
   vim.g.neovide_cursor_vfx_particle_density = 10.0
-  vim.g.neovide_transparency = 0.85
+
+  -- Apply transparency only when it's not on Windows
+  print(is_on_windows_or_wsl())
+  if not is_on_windows_or_wsl() then
+    vim.g.neovide_transparency = 0.85
+  end
 
   -- Disable IME when not in insert mode
   local function set_ime(args)
