@@ -320,6 +320,12 @@ vim.g.netrw_bufsettings = 'noma nomod nu rnu nobl nowrap ro'
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
+-- Center cursor with big vertical motions
+vim.keymap.set({ 'n', 'v' }, '<C-d>', '<C-d>zz', { silent = true })
+vim.keymap.set({ 'n', 'v' }, '<C-u>', '<C-u>zz', { silent = true })
+vim.keymap.set({ 'n', 'v' }, '<C-f>', '<C-f>zz', { silent = true })
+vim.keymap.set({ 'n', 'v' }, '<C-b>', '<C-b>zz', { silent = true })
+
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -331,8 +337,6 @@ vim.keymap.set({ 'n', 'v' }, '<C-c>', '<cmd> %y+ <CR>', { silent = true })
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-s>', ':w<CR>', { silent = true })
 
 -- Switch between buffers
-vim.keymap.set('n', '<leader>bn', '<cmd>bnext<CR>', { desc = '[B]uffer [N]ext', silent = true })
-vim.keymap.set('n', '<leader>bp', '<cmd>bnext<CR>', { desc = '[B]uffer [P]revious', silent = true })
 vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'Left window', silent = true })
 vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'Upper window', silent = true })
 vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Lower window', silent = true })
