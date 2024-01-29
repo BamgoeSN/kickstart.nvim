@@ -290,8 +290,8 @@ local function update_config()
   if vim.fn.isdirectory(git) == 1 then
     local cmd = string.format('cd %s && git pull', vim.fn.shellescape(dir))
     print("Executing " .. cmd)
-    vim.fn.system(cmd)
-    print("Completed.")
+    local output = vim.fn.system(cmd)
+    print(output)
   end
 end
 vim.api.nvim_create_user_command('UpdateConfig', update_config, { desc = { 'Updates neovim config' } })
