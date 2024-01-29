@@ -286,6 +286,20 @@ local function is_on_wsl()
   return content:find("WSL") ~= nil
 end
 
+-- [[ Utility commands ]]
+local function update_config()
+  local runtime_paths = vim.api.nvim_list_runtime_paths()
+  local dir = runtime_paths[1]
+  local git = vim.fn.expand(dir .. '/.git')
+  if vim.fn.isdirectory(git) == 1 then
+    local cmd = string.format('cd %s && git pull', vim.fn.shellescape(dir))
+    print("Executing " .. cmd)
+    vim.fn.system(cmd)
+    print("Completed.")
+  end
+end
+vim.api.nvim_create_user_command('UpdateConfig', update_config, { desc = { 'Updates neovim config' } })
+
 -- local function is_on_windows_or_wsl()
 --   if vim.loop.os_uname().sysname == 'Windows_NT' then return true end
 --   local f = io.open("/proc/version", "rb")
