@@ -483,7 +483,7 @@ end, 0)
 -- Neovide configuration
 if vim.g.neovide then
   vim.cmd('TransparentDisable')
-  vim.o.guifont = "FiraCode Nerd Font:h12"
+  vim.o.guifont = "FiraCode Nerd Font:h11"
   vim.g.neovide_remember_window_size = true
   vim.g.neovide_refresh_rate = 180
   vim.g.neovide_scroll_animation_length = 0.05
