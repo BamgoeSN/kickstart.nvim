@@ -283,6 +283,9 @@ end
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 
+-- Set tab size
+vim.o.tabstop = 4
+
 -- Set highlight on search
 vim.o.hlsearch = false
 
