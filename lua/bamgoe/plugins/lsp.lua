@@ -98,6 +98,8 @@ return {
       -- tsserver = {},
       -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
+      clangd = {},
+
       lua_ls = {
         Lua = {
           workspace = { checkThirdParty = false },

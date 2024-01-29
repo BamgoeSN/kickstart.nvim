@@ -270,14 +270,30 @@ require('lazy').setup({
 }, {})
 
 -- [[ Utility funcitons ]]
-local function is_on_windows_or_wsl()
-  if vim.loop.os_uname().sysname == 'Windows_NT' then return true end
+local function is_on_windows()
+  -- Returns true on plain Windows
+  -- Returns false on WSL or plain Linux
+  return string.find(vim.loop.os_uname().sysname, 'Windows') ~= nil
+end
+
+local function is_on_wsl()
+  -- Returns true on WSL
+  -- Returns false on plain Windows or Linux
   local f = io.open("/proc/version", "rb")
   if not f then return false end
   local content = f:read("*a")
   f:close()
   return content:find("WSL") ~= nil
 end
+
+-- local function is_on_windows_or_wsl()
+--   if vim.loop.os_uname().sysname == 'Windows_NT' then return true end
+--   local f = io.open("/proc/version", "rb")
+--   if not f then return false end
+--   local content = f:read("*a")
+--   f:close()
+--   return content:find("WSL") ~= nil
+-- end
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -328,7 +344,7 @@ vim.o.termguicolors = true
 vim.g.netrw_bufsettings = 'noma nomod nu rnu nobl nowrap ro'
 
 -- Use Powershell as a default shell on Windows
-if is_on_windows_or_wsl() then
+if is_on_windows() then
   vim.o.shell = 'pwsh'
   vim.o.shellcmdflag = '-command'
   vim.o.shellquote = '\"'
@@ -478,8 +494,7 @@ if vim.g.neovide then
   vim.g.neovide_cursor_vfx_particle_density = 10.0
 
   -- Apply transparency only when it's not on Windows
-  print(is_on_windows_or_wsl())
-  if not is_on_windows_or_wsl() then
+  if not is_on_windows() and not is_on_wsl() then
     vim.g.neovide_transparency = 0.85
   end
 
