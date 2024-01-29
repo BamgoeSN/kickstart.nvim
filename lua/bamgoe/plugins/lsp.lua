@@ -14,12 +14,6 @@ return {
     -- [[ Configure LSP ]]
     --  This function gets run when an LSP connects to a particular buffer.
     local on_attach = function(_, bufnr)
-      -- NOTE: Remember that lua is a real programming language, and as such it is possible
-      -- to define small helper and utility functions so you don't have to repeat yourself
-      -- many times.
-      --
-      -- In this case, we create a function that lets us more easily define mappings specific
-      -- for LSP related items. It sets the mode, buffer and description for us each time.
       local nmap = function(keys, func, desc)
         if desc then
           desc = 'LSP: ' .. desc
@@ -83,11 +77,6 @@ return {
     require('mason-lspconfig').setup()
 
     -- Enable the following language servers
-    --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-    --
-    --  Add any additional override configuration in the following tables. They will be passed to
-    --  the `settings` field of the server config. You must look up that documentation yourself.
-    --
     --  If you want to override the default filetypes that your language server will attach to you can
     --  define the property 'filetypes' to the map in question.
     local servers = {
@@ -133,7 +122,7 @@ return {
     capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
     -- Ensure the servers above are installed
-    local mason_lspconfig = require 'mason-lspconfig'
+    local mason_lspconfig = require('mason-lspconfig')
 
     mason_lspconfig.setup {
       ensure_installed = vim.tbl_keys(servers),

@@ -7,10 +7,8 @@
 -- kickstart.nvim and not kitchen-sink.nvim ;)
 
 return {
-  -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
   event = { 'BufNewFile', 'BufReadPost' },
-  -- NOTE: And you can specify dependencies as well
   dependencies = {
     -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
@@ -59,6 +57,9 @@ return {
     vim.keymap.set('n', '<leader>B', function()
       dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
     end, { desc = 'Debug: Set Conditional Breakpoint' })
+    -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
+    vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result' })
+
 
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
@@ -81,9 +82,6 @@ return {
         },
       },
     }
-
-    -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-    vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result.' })
 
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close

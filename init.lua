@@ -1,14 +1,9 @@
 -- kickstart.nvim
 
--- Set <space> as the leader key
--- See `:help mapleader`
---  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- [[ Install `lazy.nvim` plugin manager ]]
---    https://github.com/folke/lazy.nvim
---    `:help lazy.nvim.txt` for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
@@ -23,11 +18,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- [[ Configure plugins ]]
--- NOTE: Here is where you install your plugins.
---  You can configure plugins using the `config` key.
---
---  You can also configure plugins after the setup call,
---    as they will be available in your neovim runtime.
 require('lazy').setup({
   -- Git related plugins
   'tpope/vim-fugitive',
@@ -56,11 +46,11 @@ require('lazy').setup({
 
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim',  opts = {} },
+
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
-      -- See `:help gitsigns.txt`
       signs = {
         add = { text = '+' },
         change = { text = '~' },
@@ -99,14 +89,12 @@ require('lazy').setup({
         end, { expr = true, desc = 'Jump to previous hunk' })
 
         -- Actions
-        -- visual mode
         map('v', '<leader>hs', function()
           gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
         end, { desc = 'stage git hunk' })
         map('v', '<leader>hr', function()
           gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
         end, { desc = 'reset git hunk' })
-        -- normal mode
         map('n', '<leader>hs', gs.stage_hunk, { desc = 'git stage hunk' })
         map('n', '<leader>hr', gs.reset_hunk, { desc = 'git reset hunk' })
         map('n', '<leader>hS', gs.stage_buffer, { desc = 'git Stage buffer' })
@@ -131,8 +119,8 @@ require('lazy').setup({
     },
   },
 
-  -- Undotree
   {
+    -- Undotree
     "jiaoshijie/undotree",
     dependencies = "nvim-lua/plenary.nvim",
     config = true,
@@ -141,41 +129,22 @@ require('lazy').setup({
     },
   },
 
-  -- {
-  --   -- Nord theme
-  --   'shaunsingh/nord.nvim',
-  --   priority = 1000,
-  --   config = function()
-  --     vim.g.nord_disable_background = true
-  --     vim.g.nord_contrast = true
-  --     vim.g.nord_borders = true
-  --     vim.g.nord_italic = false
-  --     vim.g.nord_bold = false
-  --
-  --     require('nord').set()
-  --     -- vim.cmd.colorscheme 'nord'
-  --   end,
-  -- },
-
-  -- Onenord theme
   {
-    'rmehri01/onenord.nvim',
-    priority = 1000,
-    opts = {
-      theme = "dark",
-    },
-  },
-
-  -- Transparent background
-  {
+    -- Transparent background
     'xiyaowong/transparent.nvim',
     config = function()
       vim.cmd(':TransparentEnable')
     end
   },
 
-  -- -- Rainbow delimiters and indents
-  -- "hiphish/rainbow-delimiters.nvim",
+  {
+    -- Onenord theme
+    'rmehri01/onenord.nvim',
+    priority = 1000,
+    opts = {
+      theme = "dark",
+    },
+  },
 
   {
     -- Set lualine as statusline
@@ -196,10 +165,9 @@ require('lazy').setup({
   },
 
   {
-    -- Add indentation guides even on blank lines
-    'lukas-reineke/indent-blankline.nvim',
-    -- Enable `lukas-reineke/indent-blankline.nvim`
+    -- Indentation guides
     -- See `:help ibl`
+    'lukas-reineke/indent-blankline.nvim',
     main = 'ibl',
     opts = {},
   },
@@ -218,30 +186,18 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 
-  -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
-  --       These are some example plugins that I've included in the kickstart repository.
-  --       Uncomment any of the lines below to enable them.
-  -- require 'bamgoe.plugins.autoformat',
+  -- DAP
   require 'bamgoe.plugins.debug',
 
-  -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-  --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
-  --    up-to-date with whatever is in the kickstart repo.
-  --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  --
-  --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-  -- { import = 'custom.plugins' },
-
-
-  -- Automatic bracket completion
   {
+    -- Automatic bracket completion
     'windwp/nvim-autopairs',
     event = "InsertEnter",
     opts = {} -- this is equalent to setup({}) function
   },
 
-  -- Surround selection with brackets
   {
+    -- Surround selection with brackets
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "BufEnter",
@@ -250,8 +206,8 @@ require('lazy').setup({
     end,
   },
 
-  -- Contest companion
   {
+    -- Contest companion
     "xeluxee/competitest.nvim",
     event = "BufEnter",
     dependencies = "MunifTanjim/nui.nvim",
@@ -270,19 +226,20 @@ require('lazy').setup({
 }, {})
 
 -- [[ Utility funcitons ]]
+-- Returns true on plain Windows
+-- Returns false on WSL or plain Linux
 local function is_on_windows()
-  -- Returns true on plain Windows
-  -- Returns false on WSL or plain Linux
   return string.find(vim.loop.os_uname().sysname, 'Windows') ~= nil
 end
 
+-- Returns true on WSL
+-- Returns false on plain Windows or Linux
 local function is_on_wsl()
-  -- Returns true on WSL
-  -- Returns false on plain Windows or Linux
   return string.find(vim.loop.os_uname().release, 'microsoft') ~= nil
 end
 
--- [[ Utility commands ]]
+-- Automatically executes `git pull` on the config directory.
+-- More accurately, it executes the command on the first directory of runtime paths.
 local function update_config()
   local runtime_paths = vim.api.nvim_list_runtime_paths()
   local dir = runtime_paths[1]
@@ -296,18 +253,8 @@ local function update_config()
 end
 vim.api.nvim_create_user_command('UpdateConfig', update_config, { desc = { 'Updates neovim config' } })
 
--- local function is_on_windows_or_wsl()
---   if vim.loop.os_uname().sysname == 'Windows_NT' then return true end
---   local f = io.open("/proc/version", "rb")
---   if not f then return false end
---   local content = f:read("*a")
---   f:close()
---   return content:find("WSL") ~= nil
--- end
-
 -- [[ Setting options ]]
 -- See `:help vim.o`
--- NOTE: You can change these options as you wish!
 
 -- Set tab size
 vim.o.tabstop = 4
@@ -342,7 +289,7 @@ vim.wo.signcolumn = 'yes'
 
 -- Decrease update time
 vim.o.updatetime = 250
-vim.o.timeoutlen = 300
+vim.o.timeoutlen = 150
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
@@ -367,10 +314,9 @@ end
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
--- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
--- Center cursor with big vertical motions
+-- Center cursor after big vertical motions
 vim.keymap.set({ 'n', 'v' }, '<C-d>', '<C-d>zz', { silent = true })
 vim.keymap.set({ 'n', 'v' }, '<C-u>', '<C-u>zz', { silent = true })
 vim.keymap.set({ 'n', 'v' }, '<C-f>', '<C-f>zz', { silent = true })
@@ -406,7 +352,6 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open float
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- [[ Highlight on yank ]]
--- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
@@ -417,11 +362,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- [[ Configure Treesitter ]]
--- See `:help nvim-treesitter`
 -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
-    -- Add languages to be installed here that you want installed for treesitter
     ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'markdown' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
@@ -440,7 +383,7 @@ vim.defer_fn(function()
         init_selection = '<c-space>',
         node_incremental = '<c-space>',
         scope_incremental = '<c-s>',
-        node_decremental = '<M-space>',
+        node_decremental = '<cm-space>',
       },
     },
     textobjects = {
@@ -461,18 +404,22 @@ vim.defer_fn(function()
         enable = true,
         set_jumps = true, -- whether to set jumps in the jumplist
         goto_next_start = {
+          [']a'] = '@parameter.outer',
           [']m'] = '@function.outer',
           [']]'] = '@class.outer',
         },
         goto_next_end = {
+          [']A'] = '@parameter.outer',
           [']M'] = '@function.outer',
           [']['] = '@class.outer',
         },
         goto_previous_start = {
+          ['[a'] = '@parameter.outer',
           ['[m'] = '@function.outer',
           ['[['] = '@class.outer',
         },
         goto_previous_end = {
+          ['[A'] = '@parameter.outer',
           ['[M'] = '@function.outer',
           ['[]'] = '@class.outer',
         },
@@ -489,9 +436,6 @@ vim.defer_fn(function()
     },
   }
 end, 0)
-
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
 
 -- Neovide configuration
 if vim.g.neovide then
@@ -534,3 +478,6 @@ if vim.g.neovide then
     callback = set_ime
   })
 end
+
+-- The line beneath this is called `modeline`. See `:help modeline`
+-- vim: ts=2 sts=2 sw=2 et

@@ -9,17 +9,15 @@ return {
     -- requirements installed.
     {
       'nvim-telescope/telescope-fzf-native.nvim',
-      -- NOTE: If you are having trouble with this installation,
-      --       refer to the README for telescope-fzf-native for more instructions.
       build = 'make',
       cond = function()
         return vim.fn.executable 'make' == 1
       end,
     },
   },
+
   config = function()
     -- [[ Configure Telescope ]]
-    -- See `:help telescope` and `:help telescope.setup()`
     require('telescope').setup {
       defaults = {
         sorting_strategy = 'ascending',
@@ -97,6 +95,9 @@ return {
     vim.keymap.set('n', '<leader>ss', require('telescope.builtin').builtin, { desc = '[S]earch [S]elect Telescope' })
     vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
     vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+    vim.keymap.set('n', '<leader>sa',
+      function() require('telescope.builtin').find_files({ hidden = true, no_ignore = true, no_ignore_parent = true }) end,
+      { desc = '[S]earch [A]ll files' })
     vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
     vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
     vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
