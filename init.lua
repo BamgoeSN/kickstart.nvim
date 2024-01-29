@@ -279,11 +279,7 @@ end
 local function is_on_wsl()
   -- Returns true on WSL
   -- Returns false on plain Windows or Linux
-  local f = io.open("/proc/version", "rb")
-  if not f then return false end
-  local content = f:read("*a")
-  f:close()
-  return content:find("WSL") ~= nil
+  return string.find(vim.loop.os_uname().release, 'microsoft') ~= nil
 end
 
 -- [[ Utility commands ]]
