@@ -301,7 +301,7 @@ vim.o.termguicolors = true
 -- Enable line numbers in netrw
 vim.g.netrw_bufsettings = 'noma nomod nu rnu nobl nowrap ro'
 -- Set preferred netrw display as tree
-vim.g.netrw_liststyle = 3
+-- vim.g.netrw_liststyle = 3
 
 -- Use Powershell as a default shell on Windows
 if is_on_windows() then
