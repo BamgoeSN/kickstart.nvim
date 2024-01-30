@@ -114,6 +114,10 @@ return {
       },
     }
 
+    -- Use the same config for C and C++ with Rust
+    dap.configurations.c = dap.configurations.rust
+    dap.configurations.cpp = dap.configurations.rust
+
     -- Enable per-project config
     require('nvim-dap-projects').search_project_config()
   end,
