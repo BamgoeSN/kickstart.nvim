@@ -1,10 +1,6 @@
 -- debug.lua
 --
 -- Shows how to use the DAP plugin to debug your code.
---
--- Primarily focused on configuring the debugger for Go, but can
--- be extended to other languages as well. That's why it's called
--- kickstart.nvim and not kitchen-sink.nvim ;)
 
 return {
   'mfussenegger/nvim-dap',
@@ -48,7 +44,7 @@ return {
 
     -- Basic debugging keymaps, feel free to change to your liking!
     vim.keymap.set('n', '<F5>', dap.continue, { desc = 'Debug: Start/Continue' })
-    vim.keymap.set('n', '<S-F5>', dap.terminate, { desc = 'Debug: Terminate' })
+    vim.keymap.set('n', '<F6>', dap.terminate, { desc = 'Debug: Terminate' })
     vim.keymap.set('n', '<F9>', dap.step_out, { desc = 'Debug: Step Out' })
     vim.keymap.set('n', '<F10>', dap.step_over, { desc = 'Debug: Step Over' })
     vim.keymap.set('n', '<F11>', dap.step_into, { desc = 'Debug: Step Into' })
