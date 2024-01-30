@@ -150,18 +150,23 @@ require('lazy').setup({
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     event = { 'TextChanged', 'ModeChanged' },
-    opts = {
-      options = {
-        icons_enabled = true,
-        theme = 'onenord',
-        component_separators = { left = '\\', right = '/' },
-        section_separators = { left = '', right = '' },
-      },
-      sections = {
-        lualine_y = { 'progress', 'location' },
-        lualine_z = { { 'datetime', style = '%Y/%m/%d %H:%M:%S' } },
-      },
-    },
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require('bamgoe.keylogger').setup()
+      require('lualine').setup({
+        options = {
+          icons_enabled = true,
+          theme = 'onenord',
+          component_separators = { left = '\\', right = '/' },
+          section_separators = { left = '', right = '' },
+        },
+        sections = {
+          lualine_y = { 'progress', 'location' },
+          lualine_z = { function() return require('bamgoe.keylogger').str end }
+          -- lualine_z = { { 'datetime', style = '%Y/%m/%d %H:%M:%S' } },
+        },
+      })
+    end,
   },
 
   {
