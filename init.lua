@@ -131,25 +131,33 @@ require('lazy').setup({
     },
   },
 
-  {
-    -- Nord theme
-    'shaunsingh/nord.nvim',
-    priority = 1000,
-    lazy = false,
-    config = function()
-      vim.g.nord_disable_background = true
-      vim.g.nord_contrast = true
-      vim.g.nord_borders = true
-      vim.g.nord_italic = false
-      vim.g.nord_bold = false
+  -- {
+  --   -- Nord theme
+  --   'shaunsingh/nord.nvim',
+  --   priority = 1000,
+  --   config = function()
+  --     vim.g.nord_disable_background = true
+  --     vim.g.nord_contrast = true
+  --     vim.g.nord_borders = true
+  --     vim.g.nord_italic = false
+  --     vim.g.nord_bold = false
+  --
+  --     require('nord').set()
+  --     -- vim.cmd.colorscheme 'nord'
+  --   end,
+  -- },
 
-      require('nord').set()
-      -- vim.cmd.colorscheme 'nord'
-    end,
+  -- Onenord theme
+  {
+    'rmehri01/onenord.nvim',
+    priority = 1000,
+    opts = {
+      theme = "dark",
+    },
   },
 
-  -- Rainbow delimiters and indents
-  "hiphish/rainbow-delimiters.nvim",
+  -- -- Rainbow delimiters and indents
+  -- "hiphish/rainbow-delimiters.nvim",
 
   {
     -- Set lualine as statusline
@@ -158,7 +166,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = true,
-        theme = 'nord',
+        theme = 'onenord',
         component_separators = { left = '\\', right = '/' },
         section_separators = { left = '', right = '' },
       },
