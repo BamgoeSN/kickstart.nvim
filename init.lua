@@ -159,13 +159,13 @@ require('lazy').setup({
           theme = 'onenord',
           component_separators = { left = '\\', right = '/' },
           section_separators = { left = '', right = '' },
+          refresh = {
+            statusline = 250,
+          },
         },
         sections = {
           lualine_y = { 'progress', 'location' },
           lualine_z = { function()
-            -- vim.defer_fn(function ()
-            --   require('lualine').refresh()
-            -- end, 100)
             return require('bamgoe.keylogger').str
           end }
           -- lualine_z = { { 'datetime', style = '%Y/%m/%d %H:%M:%S' } },
