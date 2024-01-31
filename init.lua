@@ -468,22 +468,22 @@ vim.defer_fn(function()
         set_jumps = true, -- whether to set jumps in the jumplist
         goto_next_start = {
           [']a'] = '@parameter.outer',
-          [']m'] = '@function.outer',
+          [']f'] = '@function.outer',
           [']]'] = '@class.outer',
         },
         goto_next_end = {
           [']A'] = '@parameter.outer',
-          [']M'] = '@function.outer',
+          [']F'] = '@function.outer',
           [']['] = '@class.outer',
         },
         goto_previous_start = {
           ['[a'] = '@parameter.outer',
-          ['[m'] = '@function.outer',
+          ['[f'] = '@function.outer',
           ['[['] = '@class.outer',
         },
         goto_previous_end = {
           ['[A'] = '@parameter.outer',
-          ['[M'] = '@function.outer',
+          ['[F'] = '@function.outer',
           ['[]'] = '@class.outer',
         },
       },
