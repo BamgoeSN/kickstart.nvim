@@ -164,6 +164,16 @@ require('lazy').setup({
           },
         },
         sections = {
+          lualine_c = { {
+            'buffers',
+            show_filename_only = false,
+            mode = 2,
+            buffers_color = {
+              active = 'lualine_b_normal',
+              inactive = 'lualine_c_inactive',
+            },
+            symbols = { alternate_file = '#' },
+          } },
           lualine_y = { 'progress', 'location' },
           lualine_z = { function()
             return require('bamgoe.keylogger').str
@@ -236,6 +246,29 @@ require('lazy').setup({
 }, {})
 
 -- [[ Utility funcitons ]]
+-- Returns a list of loaded buffers
+local function list_loaded_bufs()
+  local bufs = vim.api.nvim_list_bufs()
+  local loaded = {}
+  for _, bufnr in ipairs(bufs) do
+    if vim.api.nvim_buf_get_option(bufnr, 'buflisted') then
+      table.insert(loaded, bufnr)
+    end
+  end
+  return loaded
+end
+
+-- Returns a function which picks a given index of buffer
+local function get_buf_picker(index)
+  local loaded = list_loaded_bufs()
+  return function()
+    local bufnr = loaded[index]
+    if bufnr ~= nil then
+      vim.api.nvim_set_current_buf(bufnr)
+    end
+  end
+end
+
 -- Returns true on plain Windows
 -- Returns false on WSL or plain Linux
 local function is_on_windows()
@@ -271,7 +304,7 @@ vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 
 -- Turn tabline on by default
-vim.o.showtabline = 2
+-- vim.o.showtabline = 2
 
 -- Set highlight on search
 vim.o.hlsearch = false
@@ -330,6 +363,21 @@ end
 -- Keymaps for better default experience
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
+-- Switch between buffers
+-- vim.keymap.set({ 'n', 'v' }, '<leader>bn', '<cmd> bn <cr>', { desc = '[B]uffer [N]ext', silent = true })
+-- vim.keymap.set({ 'n', 'v' }, '<leader>bp', '<cmd> bp <cr>', { desc = '[B]uffer [P]revious', silent = true })
+vim.keymap.set({ 'n', 'v' }, ']b', '<cmd> bn <cr>', { desc = 'Go to the next [B]uffer', silent = true })
+vim.keymap.set({ 'n', 'v' }, '[b', '<cmd> bp <cr>', { desc = 'Go to the previous [B]uffer', silent = true })
+for i = 1, 9 do
+  vim.keymap.set({ 'n', 'v' }, '<leader>b' .. i, function()
+    local bufs = list_loaded_bufs()
+    local bufnr = bufs[i]
+    if bufnr ~= nil then
+      vim.api.nvim_set_current_buf(bufnr)
+    end
+  end, { desc = 'Go to the [B]uffer #' .. i })
+end
+
 -- Center cursor after big vertical motions
 vim.keymap.set({ 'n', 'v' }, '<C-d>', '<C-d>zz', { silent = true })
 vim.keymap.set({ 'n', 'v' }, '<C-u>', '<C-u>zz', { silent = true })
@@ -346,13 +394,14 @@ vim.keymap.set({ 'n', 'v' }, '<C-c>', '<cmd> %y+ <CR>', { silent = true })
 -- Easy save
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-s>', ':w<CR>', { silent = true })
 
--- Switch between buffers
+-- Switch between windows
 vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'Left window', silent = true })
 vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'Upper window', silent = true })
 vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Lower window', silent = true })
 vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Right window', silent = true })
 
 -- Terminal
+vim.keymap.set({ 'n', 'v' }, '<leader>tt', '<cmd>terminal<cr>', { desc = '[T]erminal mode' })
 vim.keymap.set({ 'n', 'v' }, '<leader>tv', '<cmd>vsp<cr> <C-w><C-l> <cmd>terminal<cr> i',
   { desc = '[T]erminal as [V]ertical split' })
 vim.keymap.set({ 'n', 'v' }, '<leader>th', '<cmd>split<cr> <C-w><C-j> <cmd>terminal<cr> i',

@@ -7,7 +7,9 @@ local convert = require('bamgoe.keylogger.convert').convert
 function M.setup(opt)
   local default_opt = {
     maxlog = 100,
-    strmax = 30,
+    strmax = function()
+      return vim.o.columns / 7
+    end,
   }
 
   if opt ~= nil then
@@ -34,14 +36,15 @@ function M.setup(opt)
       M.keylog:popleft()
     end
 
+    local aimlen = M.strmax()
     M.str = ""
     for _, v in M.keylog:ipairs_left() do
       M.str = M.str .. " " .. v
     end
-    while M.str:len() < M.strmax do
+    while M.str:len() < aimlen do
       M.str = M.str .. " "
     end
-    M.str = M.str:sub(M.str:len() + 1 - M.strmax, M.str:len())
+    M.str = M.str:sub(M.str:len() + 1 - aimlen, M.str:len())
   end)
 end
 
