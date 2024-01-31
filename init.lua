@@ -281,14 +281,14 @@ local function is_on_wsl()
   return string.find(vim.loop.os_uname().release, 'microsoft') ~= nil
 end
 
--- Automatically executes `git pull` on the config directory.
+-- Automatically executes `git pull --rebase` on the config directory.
 -- More accurately, it executes the command on the first directory of runtime paths.
 local function update_config()
   local runtime_paths = vim.api.nvim_list_runtime_paths()
   local dir = runtime_paths[1]
   local git = vim.fn.expand(dir .. '/.git')
   if vim.fn.isdirectory(git) == 1 then
-    local cmd = string.format('cd %s && git pull', vim.fn.shellescape(dir))
+    local cmd = string.format('cd %s && git pull --rebase', vim.fn.shellescape(dir))
     print("Executing " .. cmd)
     local output = vim.fn.system(cmd)
     print(output)
