@@ -268,6 +268,10 @@ vim.api.nvim_create_user_command('UpdateConfig', update_config, { desc = { 'Upda
 
 -- Set tab size
 vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+
+-- Turn tabline on by default
+vim.o.showtabline = 2
 
 -- Set highlight on search
 vim.o.hlsearch = false
