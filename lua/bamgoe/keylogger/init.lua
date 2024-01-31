@@ -1,5 +1,3 @@
--- keylogger.lua
-
 M = {}
 
 -- Convert keystroke argument into a prettier form to print

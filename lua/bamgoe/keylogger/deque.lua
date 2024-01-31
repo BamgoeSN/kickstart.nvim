@@ -1,5 +1,3 @@
--- deque.lua
-
 local M = {}
 
 local Deque = {}
