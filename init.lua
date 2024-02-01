@@ -137,6 +137,8 @@ require('lazy').setup({
       local onenord = require('onenord.colors.onenord')
       vim.api.nvim_set_hl(0, "NeoTreeFileStats", { fg = onenord.light_gray })
       vim.api.nvim_set_hl(0, "NeoTreeFileStatsHeader", { fg = onenord.light_green })
+      vim.api.nvim_set_hl(0, "NeoTreeMessage", { fg = onenord.dark_blue })
+      vim.api.nvim_set_hl(0, "NeoTreeDotfile", { fg = onenord.gray })
 
       -- Run setup here
       require('neo-tree').setup({
@@ -396,12 +398,6 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
--- netrw settngs
--- Enable line numbers in netrw
-vim.g.netrw_bufsettings = 'noma nomod nu rnu nobl nowrap ro'
--- Set preferred netrw display as tree
--- vim.g.netrw_liststyle = 3
-
 -- Use Powershell as a default shell on Windows
 if is_on_windows() then
   vim.o.shell = 'pwsh'
@@ -415,7 +411,7 @@ end
 -- Keymaps for better default experience
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
--- Switch between buffers
+-- Buffers
 -- vim.keymap.set({ 'n', 'v' }, '<leader>bn', '<cmd> bn <cr>', { desc = '[B]uffer [N]ext', silent = true })
 -- vim.keymap.set({ 'n', 'v' }, '<leader>bp', '<cmd> bp <cr>', { desc = '[B]uffer [P]revious', silent = true })
 vim.keymap.set({ 'n', 'v' }, ']b', '<cmd> bn <cr>', { desc = 'Go to the next [B]uffer', silent = true })
@@ -429,6 +425,7 @@ for i = 1, 9 do
     end
   end, { desc = 'Go to the [B]uffer #' .. i })
 end
+vim.keymap.set({ 'n', 'v' }, '<leader>bx', '<cmd> bdelete <cr>', { desc = "Close current [B]uffer [X]" })
 
 -- Center cursor after big vertical motions
 vim.keymap.set({ 'n', 'v' }, '<C-d>', '<C-d>zz', { silent = true })
