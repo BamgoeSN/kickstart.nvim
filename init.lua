@@ -157,7 +157,7 @@ require('lazy').setup({
       local neotree_exec = "NeotreeExec"
       vim.api.nvim_create_augroup(neotree_exec, { clear = true })
       -- Enable rnu in neo-tree
-      vim.api.nvim_create_autocmd("BufWinEnter", {
+      vim.api.nvim_create_autocmd({ "BufWinEnter", "BufEnter" }, {
         group = neotree_exec,
         pattern = "*",
         callback = function()
