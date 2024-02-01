@@ -451,9 +451,9 @@ vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Right window', silent = true })
 
 -- Terminal
 vim.keymap.set({ 'n', 'v' }, '<leader>tt', '<cmd>terminal<cr>', { desc = '[T]erminal mode' })
-vim.keymap.set({ 'n', 'v' }, '<leader>tv', '<cmd>vsp<cr> <C-w><C-l> <cmd>terminal<cr> i',
+vim.keymap.set({ 'n', 'v' }, '<leader>tv', '<cmd>vsp<cr> <C-w><C-l> <cmd>terminal<cr>G',
   { desc = '[T]erminal as [V]ertical split' })
-vim.keymap.set({ 'n', 'v' }, '<leader>th', '<cmd>split<cr> <C-w><C-j> <cmd>terminal<cr> i',
+vim.keymap.set({ 'n', 'v' }, '<leader>th', '<cmd>split<cr> <C-w><C-j> <cmd>terminal<cr> 10<C-w>-G',
   { desc = '[T]erminal as [H]orizontal split' })
 vim.keymap.set('t', '<esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode', silent = true })
 

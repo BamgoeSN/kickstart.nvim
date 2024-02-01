@@ -28,7 +28,7 @@ function M.setup(opt)
 
   vim.on_key(function(key)
     local display = convert(key)
-    if display ~= nil and display:len() >= 1 then
+    if display ~= nil and display:len() >= 1 and vim.fn.mode() ~= "t" then
       M.keylog:pushright(display)
     end
 
