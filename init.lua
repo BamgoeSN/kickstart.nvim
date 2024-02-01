@@ -120,6 +120,56 @@ require('lazy').setup({
   },
 
   {
+    -- File tree
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
+      "MunifTanjim/nui.nvim",
+      "xiyaowong/transparent.nvim",
+      'rmehri01/onenord.nvim',
+    },
+    config = function()
+      -- Transparent background
+      vim.g.transparent_groups = vim.list_extend(vim.g.transparent_groups or {}, { "NeoTreeNormal", "NeoTreeNormalNC" })
+      -- Easier-to-see texts
+      local onenord = require('onenord.colors.onenord')
+      vim.api.nvim_set_hl(0, "NeoTreeFileStats", { fg = onenord.light_gray })
+      vim.api.nvim_set_hl(0, "NeoTreeFileStatsHeader", { fg = onenord.light_green })
+
+      -- Run setup here
+      require('neo-tree').setup({
+        window = {
+          position = "current",
+        },
+        filesystem = {
+          hijack_netrw_behavior = "open_current",
+        },
+      })
+
+      local function open_neo_tree()
+        vim.cmd("Neotree")
+      end
+      vim.api.nvim_create_user_command('E', open_neo_tree, { desc = "Open file [E]xplorer " })
+
+      -- Autocmds to run whenever neo-tree starts
+      local neotree_exec = "NeotreeExec"
+      vim.api.nvim_create_augroup(neotree_exec, { clear = true })
+      -- Enable rnu in neo-tree
+      vim.api.nvim_create_autocmd("BufWinEnter", {
+        group = neotree_exec,
+        pattern = "*",
+        callback = function()
+          if vim.bo.filetype == "neo-tree" then
+            vim.wo.relativenumber = true
+          end
+        end,
+      })
+    end,
+  },
+
+  {
     -- Undotree
     "jiaoshijie/undotree",
     dependencies = "nvim-lua/plenary.nvim",
@@ -139,6 +189,8 @@ require('lazy').setup({
 
   {
     -- Onenord theme
+    -- neo-tree explicitly depends on this colorscheme.
+    -- Make sure to modify it whenever changing the colorscheme.
     'rmehri01/onenord.nvim',
     priority = 1000,
     opts = {
