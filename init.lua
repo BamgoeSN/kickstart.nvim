@@ -47,6 +47,7 @@ require('lazy').setup({
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim',  opts = {} },
 
+  -- Gitsigns
   require('bamgoe.plugins.gitsigns'),
 
   {
@@ -80,7 +81,7 @@ require('lazy').setup({
         },
       })
 
-      vim.api.nvim_create_user_command('E', function ()
+      vim.api.nvim_create_user_command('E', function()
         vim.cmd("Neotree")
       end, { desc = "Open file [E]xplorer " })
 
@@ -145,9 +146,16 @@ require('lazy').setup({
           refresh = {
             statusline = 250,
           },
+          globalstatus = true, 
         },
         sections = {
-          lualine_c = { {
+          lualine_y = { 'progress', 'location' },
+          lualine_z = { function()
+            return require('bamgoe.keylogger').str
+          end }
+        },
+        winbar = {
+          lualine_b = { {
             'buffers',
             show_filename_only = false,
             mode = 2,
@@ -157,12 +165,8 @@ require('lazy').setup({
             },
             symbols = { alternate_file = '#' },
           } },
-          lualine_y = { 'progress', 'location' },
-          lualine_z = { function()
-            return require('bamgoe.keylogger').str
-          end }
-          -- lualine_z = { { 'datetime', style = '%Y/%m/%d %H:%M:%S' } },
-        },
+          lualine_z = { { 'datetime', style = '%Y/%m/%d %H:%M:%S' } },
+        }
       })
     end,
   },
