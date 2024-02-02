@@ -20,6 +20,7 @@ return {
     -- [[ Configure Telescope ]]
     require('telescope').setup {
       defaults = {
+        dynamic_preview_title = true,
         sorting_strategy = 'ascending',
         layout_config = {
           prompt_position = "top",
