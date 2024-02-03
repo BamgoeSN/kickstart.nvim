@@ -154,7 +154,7 @@ require('lazy').setup({
             return require('bamgoe.keylogger').str
           end }
         },
-        winbar = {
+        tabline = {
           lualine_b = { {
             'buffers',
             show_filename_only = false,
@@ -165,7 +165,7 @@ require('lazy').setup({
             },
             symbols = { alternate_file = '#' },
           } },
-          lualine_z = { { 'datetime', style = '%Y/%m/%d %H:%M:%S' } },
+          lualine_y = { { 'datetime', style = '%Y/%m/%d %H:%M:%S' } },
         }
       })
     end,
