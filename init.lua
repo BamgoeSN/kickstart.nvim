@@ -146,7 +146,7 @@ require('lazy').setup({
           refresh = {
             statusline = 250,
           },
-          globalstatus = true, 
+          globalstatus = true,
         },
         sections = {
           lualine_y = { 'progress', 'location' },
@@ -287,8 +287,10 @@ vim.api.nvim_create_user_command('UpdateConfig', update_config, { desc = { 'Upda
 -- See `:help vim.o`
 
 -- Set tab size
-vim.o.tabstop = 4
+-- See :h tabstop
+vim.o.tabstop = 8
 vim.o.shiftwidth = 4
+vim.o.softtabstop = 4
 
 -- Turn tabline on by default
 -- vim.o.showtabline = 2
