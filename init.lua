@@ -193,6 +193,18 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 
+  {
+    -- Contextline
+    "nvim-treesitter/nvim-treesitter-context",
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter'
+    },
+    opts = {
+      max_lines = 4,
+      min_window_lines = 15,
+    },
+  },
+
   -- DAP
   require 'bamgoe.plugins.debug',
 
