@@ -300,7 +300,7 @@ vim.api.nvim_create_user_command('UpdateConfig', update_config, { desc = { 'Upda
 
 -- Set tab size
 -- See :h tabstop
-vim.o.tabstop = 8
+vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.softtabstop = 4
 
