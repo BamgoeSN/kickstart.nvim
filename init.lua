@@ -364,7 +364,7 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set({ 'n', 'v' }, ']b', '<cmd> bn <cr>', { desc = 'Go to the next [B]uffer', silent = true })
 vim.keymap.set({ 'n', 'v' }, '[b', '<cmd> bp <cr>', { desc = 'Go to the previous [B]uffer', silent = true })
 for i = 1, 9 do
-  vim.keymap.set({ 'n', 'v' }, '<leader>b' .. i, function()
+  vim.keymap.set({ 'n', 'v' }, '<leader>' .. i, function()
     local bufs = list_loaded_bufs()
     local bufnr = bufs[i]
     if bufnr ~= nil then
@@ -372,7 +372,7 @@ for i = 1, 9 do
     end
   end, { desc = 'Go to the [B]uffer #' .. i })
 end
-vim.keymap.set({ 'n', 'v' }, '<leader>bx', '<cmd> bdelete <cr>', { desc = "Close current [B]uffer [X]" })
+vim.keymap.set({ 'n', 'v' }, '<leader>x', '<cmd> bdelete <cr>', { desc = "Close current [B]uffer [X]" })
 
 -- Center cursor after big vertical motions
 vim.keymap.set({ 'n', 'v' }, '<C-d>', '<C-d>zz', { silent = true })
