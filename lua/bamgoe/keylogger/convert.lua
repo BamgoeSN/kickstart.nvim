@@ -93,7 +93,6 @@ convert_table[string.char(0x80, 0xfc, 04) .. x80_y .. string.char(16)] = "<CS-F1
 convert_table[string.char(0x80, 0xfc, 04) .. x80_y .. string.char(17)] = "<CS-F12>"
 
 local function convert(key)
-  if key == "%" then return nil end
   if key:len() == 1 and string.byte(key) >= 33 and string.byte(key) <= 126 then
     return key
   end

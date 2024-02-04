@@ -45,6 +45,7 @@ function M.setup(opt)
       M.str = M.str .. " "
     end
     M.str = M.str:sub(M.str:len() + 1 - aimlen, M.str:len())
+    M.str = M.str:gsub("%%", "%%%%")
   end)
 end
 
