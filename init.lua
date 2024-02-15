@@ -391,14 +391,14 @@ vim.keymap.set({ 'n', 'v' }, '<C-c>', '<cmd> %y+ <CR>', { silent = true })
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-s>', ':w<CR>', { silent = true })
 
 -- Manipulating windows
--- vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'Left window', silent = true })
--- vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'Upper window', silent = true })
--- vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Lower window', silent = true })
--- vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Right window', silent = true })
-vim.keymap.set('n', '<C-l>', '<C-w>>', { desc = 'Increase window width', silent = true })
-vim.keymap.set('n', '<C-h>', '<C-w><', { desc = 'Decrease window width', silent = true })
-vim.keymap.set('n', '<C-k>', '<C-w>+', { desc = 'Increase window height', silent = true })
-vim.keymap.set('n', '<C-j>', '<C-w>-', { desc = 'Decrease window height', silent = true })
+vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'Left window', silent = true })
+vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'Upper window', silent = true })
+vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Lower window', silent = true })
+vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Right window', silent = true })
+-- vim.keymap.set('n', '<C-l>', '<C-w>>', { desc = 'Increase window width', silent = true })
+-- vim.keymap.set('n', '<C-h>', '<C-w><', { desc = 'Decrease window width', silent = true })
+-- vim.keymap.set('n', '<C-k>', '<C-w>+', { desc = 'Increase window height', silent = true })
+-- vim.keymap.set('n', '<C-j>', '<C-w>-', { desc = 'Decrease window height', silent = true })
 
 -- Terminal
 vim.keymap.set({ 'n', 'v' }, '<leader>tt', '<cmd>terminal<cr>', { desc = '[T]erminal mode' })
