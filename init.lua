@@ -398,7 +398,7 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set({ 'n', 'v' }, '<C-c>', '<cmd> %y+ <CR>', { silent = true })
 
 -- Easy save
-vim.keymap.set({ 'n', 'i', 'v' }, '<C-s>', ':w<CR>', { silent = true })
+vim.keymap.set({ 'n', 'i', 'v' }, '<C-s>', '<cmd>w<CR>', { silent = true })
 
 -- Manipulating windows
 vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'Left window', silent = true })
