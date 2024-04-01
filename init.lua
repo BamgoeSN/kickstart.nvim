@@ -165,7 +165,7 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set({ 'n', 'v' }, '<C-c>', '<cmd> %y+ <CR>', { silent = true })
 
 -- Easy save
-vim.keymap.set({ 'n', 'i', 'v' }, '<C-s>', '<cmd>w<CR>', { silent = true })
+vim.keymap.set({ 'n', 'i', 'v' }, '<C-s>', function() vim.cmd("w") end, { silent = true })
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
