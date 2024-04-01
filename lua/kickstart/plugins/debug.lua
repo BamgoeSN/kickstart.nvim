@@ -1,20 +1,28 @@
 -- debug.lua
 --
 -- Shows how to use the DAP plugin to debug your code.
+--
+-- Primarily focused on configuring the debugger for Go, but can
+-- be extended to other languages as well. That's why it's called
+-- kickstart.nvim and not kitchen-sink.nvim ;)
 
 return {
+  -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
-  event = { 'BufNewFile', 'BufReadPost' },
+  -- NOTE: And you can specify dependencies as well
   dependencies = {
     -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
+
+    -- Required dependency for nvim-dap-ui
+    'nvim-neotest/nvim-nio',
 
     -- Installs the debug adapters for you
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
 
     -- Enables debugging config per project
-    "ldelossa/nvim-dap-projects",
+    'ldelossa/nvim-dap-projects',
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
@@ -56,7 +64,6 @@ return {
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
     vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result' })
 
-
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
     dapui.setup {
@@ -90,18 +97,18 @@ return {
     -- https://kurotych.com/posts/rust_neovim_debugger/
     dap.adapters.codelldb = {
       type = 'server',
-      port = "${port}",
+      port = '${port}',
       executable = {
-        command = vim.fn.stdpath('data') .. '/mason/bin/codelldb',
-        args = { "--port", "${port}" },
-      }
+        command = vim.fn.stdpath 'data' .. '/mason/bin/codelldb',
+        args = { '--port', '${port}' },
+      },
     }
 
     dap.configurations.rust = {
       {
-        name = "Launch file",
-        type = "codelldb",
-        request = "launch",
+        name = 'Launch file',
+        type = 'codelldb',
+        request = 'launch',
         program = function()
           return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
         end,
