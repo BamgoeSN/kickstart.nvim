@@ -718,6 +718,14 @@ require('lazy').setup({
   },
 
   {
+    -- Transparent background
+    'xiyaowong/transparent.nvim',
+    config = function()
+      vim.cmd(':TransparentEnable')
+    end
+  },
+
+  {
     -- File tree
     'nvim-neo-tree/neo-tree.nvim',
     branch = 'v3.x',
@@ -766,6 +774,16 @@ require('lazy').setup({
         end,
       })
     end,
+  },
+
+  {
+    -- Undotree
+    "jiaoshijie/undotree",
+    dependencies = "nvim-lua/plenary.nvim",
+    config = true,
+    keys = { -- load the plugin only when using it's keybinding:
+      { "<leader>ut", "<cmd>lua require('undotree').toggle()<cr>", desc = "[U]ndo[T]ree" },
+    },
   },
 
   -- Highlight todo, notes, etc in comments
