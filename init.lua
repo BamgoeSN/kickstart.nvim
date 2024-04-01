@@ -51,6 +51,7 @@ local function update_config()
 end
 vim.api.nvim_create_user_command('UpdateConfig', update_config, { desc = { 'Updates neovim config' } })
 
+-- [[ Options ]]
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
