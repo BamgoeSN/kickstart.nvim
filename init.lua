@@ -165,7 +165,9 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set({ 'n', 'v' }, '<C-c>', '<cmd> %y+ <CR>', { silent = true })
 
 -- Easy save
-vim.keymap.set({ 'n', 'i', 'v' }, '<C-s>', function() vim.cmd("w") end, { silent = true })
+vim.keymap.set({ 'n', 'i', 'v' }, '<C-s>', function()
+  vim.cmd 'w'
+end, { silent = true })
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
@@ -176,10 +178,8 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- Terminal
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 vim.keymap.set({ 'n', 'v' }, '<leader>tt', '<cmd>terminal<cr>', { desc = '[T]erminal mode' })
-vim.keymap.set({ 'n', 'v' }, '<leader>tv', '<cmd>vsp<cr> <C-w><C-l> <cmd>terminal<cr>G',
-  { desc = '[T]erminal as [V]ertical split' })
-vim.keymap.set({ 'n', 'v' }, '<leader>th', '<cmd>split<cr> <C-w><C-j> <cmd>terminal<cr> 10<C-w>-G',
-  { desc = '[T]erminal as [H]orizontal split' })
+vim.keymap.set({ 'n', 'v' }, '<leader>tv', '<cmd>vsp<cr> <C-w><C-l> <cmd>terminal<cr>G', { desc = '[T]erminal as [V]ertical split' })
+vim.keymap.set({ 'n', 'v' }, '<leader>th', '<cmd>split<cr> <C-w><C-j> <cmd>terminal<cr> 10<C-w>-G', { desc = '[T]erminal as [H]orizontal split' })
 
 -- [[ Competitest ]]
 vim.keymap.set('n', '<leader>tr', ':CompetiTest run <CR>', { desc = '[T]estcases [R]un' })
@@ -232,15 +232,26 @@ vim.opt.rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-  -- 'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  {
+    -- Detect tabstop and shiftwidth automatically
+    'tpope/vim-sleuth',
+    config = function()
+      vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
+        desc = 'Set tabstop to 4',
+        callback = function()
+          vim.opt.tabstop = 4
+        end,
+      })
+    end,
+  },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim',    opts = {} },
+  { 'numToStr/Comment.nvim', opts = {} },
 
   -- Adds git related signs to the gutter, as well as utilities for managing changes
   require 'kickstart.plugins.gitsigns',
 
-  {                     -- Useful plugin to show you pending keybinds.
+  { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     config = function() -- This is the function that runs, AFTER loading
@@ -285,7 +296,7 @@ require('lazy').setup({
       -- Useful for getting pretty icons, but requires a Nerd Font.
       {
         'nvim-tree/nvim-web-devicons',
-        enabled = vim.g.have_nerd_font
+        enabled = vim.g.have_nerd_font,
       },
     },
     config = function()
@@ -329,7 +340,7 @@ require('lazy').setup({
           dynamic_preview_title = true,
           sorting_strategy = 'ascending',
           layout_config = {
-            prompt_position = "top",
+            prompt_position = 'top',
           },
           mappings = {
             i = {
@@ -400,7 +411,7 @@ require('lazy').setup({
               winblend = 0,
             },
           },
-        }
+        },
       },
 
       -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
@@ -737,8 +748,8 @@ require('lazy').setup({
     -- Transparent background
     'xiyaowong/transparent.nvim',
     config = function()
-      vim.cmd(':TransparentEnable')
-    end
+      vim.cmd ':TransparentEnable'
+    end,
   },
 
   {
@@ -794,11 +805,11 @@ require('lazy').setup({
 
   {
     -- Undotree
-    "jiaoshijie/undotree",
-    dependencies = "nvim-lua/plenary.nvim",
+    'jiaoshijie/undotree',
+    dependencies = 'nvim-lua/plenary.nvim',
     config = true,
     keys = { -- load the plugin only when using it's keybinding:
-      { "<leader>ut", "<cmd>lua require('undotree').toggle()<cr>", desc = "[U]ndo[T]ree" },
+      { '<leader>ut', "<cmd>lua require('undotree').toggle()<cr>", desc = '[U]ndo[T]ree' },
     },
   },
 
@@ -810,7 +821,7 @@ require('lazy').setup({
     'norcalli/nvim-colorizer.lua',
     config = function()
       require('colorizer').setup()
-    end
+    end,
   },
 
   { -- Collection of various small independent plugins/modules
@@ -853,8 +864,8 @@ require('lazy').setup({
 
   {
     'windwp/nvim-autopairs',
-    event = "InsertEnter",
-    config = true
+    event = 'InsertEnter',
+    config = true,
     -- use opts = {} for passing setup options
     -- this is equalent to setup({}) function
   },
