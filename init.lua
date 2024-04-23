@@ -541,7 +541,7 @@ require('lazy').setup({
         },
 
         clangd = {},
-        ruff_lsp = {},
+        ruff = {},
         rust_analyzer = {
           settings = {
             ['rust-analyzer'] = {
