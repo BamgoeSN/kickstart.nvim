@@ -840,7 +840,20 @@ require('lazy').setup({
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
-      require('mini.surround').setup()
+      require('mini.surround').setup {
+        mappings = {
+          add = 'ysa', -- Add surrounding in Normal and Visual modes
+          delete = 'ysd', -- Delete surrounding
+          find = 'ysf', -- Find surrounding (to the right)
+          find_left = 'ysF', -- Find surrounding (to the left)
+          highlight = 'ysh', -- Highlight surrounding
+          replace = 'ysr', -- Replace surrounding
+          update_n_lines = 'ysn', -- Update `n_lines`
+
+          suffix_last = 'l', -- Suffix to search with "prev" method
+          suffix_next = 'n', -- Suffix to search with "next" method
+        },
+      }
 
       -- -- Simple and easy statusline.
       -- --  You could remove this setup call if you don't like it,
@@ -1065,7 +1078,8 @@ require('lazy').setup({
 -- [[ Neovide ]]
 if vim.g.neovide then
   vim.cmd 'TransparentDisable'
-  vim.o.guifont = 'FiraCode Nerd Font:h11'
+  Fsize = 13
+  vim.o.guifont = 'FiraCode Nerd Font:h' .. Fsize
   vim.g.neovide_remember_window_size = true
   vim.g.neovide_refresh_rate = 180
   vim.g.neovide_scroll_animation_length = 0.05
@@ -1077,7 +1091,7 @@ if vim.g.neovide then
 
   -- Apply transparency only when it's not on Windows
   if not is_on_windows() and not is_on_wsl() then
-    vim.g.neovide_transparency = 0.85
+    -- vim.g.neovide_transparency = 0.85
   end
 
   -- Disable IME when not in insert mode
