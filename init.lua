@@ -1078,7 +1078,7 @@ require('lazy').setup({
 -- [[ Neovide ]]
 if vim.g.neovide then
   vim.cmd 'TransparentDisable'
-  Fsize = 13
+  Fsize = 12
   vim.o.guifont = 'FiraCode Nerd Font:h' .. Fsize
   vim.g.neovide_remember_window_size = true
   vim.g.neovide_refresh_rate = 180
@@ -1089,9 +1089,11 @@ if vim.g.neovide then
   vim.g.neovide_cursor_vfx_mode = 'torpedo'
   vim.g.neovide_cursor_vfx_particle_density = 10.0
 
-  -- Apply transparency only when it's not on Windows
-  if not is_on_windows() and not is_on_wsl() then
+  -- Smaller font size if on Windows or on WSL
+  if is_on_windows() or is_on_wsl() then
     -- vim.g.neovide_transparency = 0.85
+    Fsize = 12
+    vim.o.guifont = 'FiraCode Nerd Font:h' .. Fsize
   end
 
   -- Disable IME when not in insert mode
