@@ -1047,6 +1047,33 @@ require('lazy').setup({
     end,
   },
 
+  -- Neorg
+  {
+    'nvim-neorg/neorg',
+    dependencies = { {
+      'vhyrro/luarocks.nvim',
+      priority = 1001,
+      config = true,
+    } },
+    lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
+    version = '*', -- Pin Neorg to the latest stable release
+    opts = {
+      load = {
+        ["core.defaults"] = {},
+        ["core.concealer"] = {},
+        ["core.dirman"] = {
+          config = {
+            workspaces = {
+              notes = "~/notes",
+            },
+            default_workspace = "notes",
+          }
+        },
+      }
+    },
+    config = true,
+  },
+
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
   --
