@@ -919,7 +919,7 @@ require('lazy').setup({
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
-    event = { 'TextChanged', 'ModeChanged' },
+    -- event = { 'TextChanged', 'ModeChanged' },
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
       require('kickstart.keylogger').setup()
