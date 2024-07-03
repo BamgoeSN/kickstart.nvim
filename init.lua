@@ -1097,19 +1097,29 @@ require('lazy').setup({
     version = '*', -- Pin Neorg to the latest stable release
     opts = {
       load = {
-        ["core.defaults"] = {},
-        ["core.concealer"] = {},
-        ["core.dirman"] = {
+        ['core.defaults'] = {},
+        ['core.concealer'] = {},
+        ['core.dirman'] = {
           config = {
             workspaces = {
-              notes = "~/notes",
+              notes = '~/notes',
             },
-            default_workspace = "notes",
-          }
+            default_workspace = 'notes',
+          },
         },
-      }
+      },
     },
     config = true,
+  },
+
+  -- Typst preview
+  {
+    'chomosuke/typst-preview.nvim',
+    ft = 'typst',
+    version = '0.3.*',
+    build = function()
+      require('typst-preview').update()
+    end,
   },
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
