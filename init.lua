@@ -647,7 +647,7 @@ require('lazy').setup({
       -- end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        python = { 'ruff' },
+        python = { 'ruff_format' },
         rust = { 'rustfmt' },
         cpp = { 'clangd' },
         -- Conform can also run multiple formatters sequentially
