@@ -800,54 +800,66 @@ require('lazy').setup({
 
   {
     -- File tree
-    'nvim-neo-tree/neo-tree.nvim',
-    branch = 'v3.x',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-tree/nvim-web-devicons',
-      'MunifTanjim/nui.nvim',
-      'xiyaowong/transparent.nvim',
-      'rmehri01/onenord.nvim',
-    },
+    'stevearc/oil.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
-      -- Transparent background
-      vim.g.transparent_groups = vim.list_extend(vim.g.transparent_groups or {}, { 'NeoTreeNormal', 'NeoTreeNormalNC' })
-      -- Easier-to-see texts
-      local onenord = require 'onenord.colors.onenord'
-      vim.api.nvim_set_hl(0, 'NeoTreeFileStats', { fg = onenord.light_gray })
-      vim.api.nvim_set_hl(0, 'NeoTreeFileStatsHeader', { fg = onenord.light_green })
-      vim.api.nvim_set_hl(0, 'NeoTreeMessage', { fg = onenord.dark_blue })
-      vim.api.nvim_set_hl(0, 'NeoTreeDotfile', { fg = onenord.gray })
-
-      -- Run setup here
-      require('neo-tree').setup {
-        window = {
-          position = 'current',
-        },
-        filesystem = {
-          hijack_netrw_behavior = 'open_current',
-        },
-      }
-
       vim.api.nvim_create_user_command('E', function()
-        vim.cmd 'Neotree'
+        vim.cmd 'Oil'
       end, { desc = 'Open file [E]xplorer ' })
-
-      -- Autocmds to run whenever neo-tree starts
-      local neotree_exec = 'NeotreeExec'
-      vim.api.nvim_create_augroup(neotree_exec, { clear = true })
-      -- Enable rnu in neo-tree
-      vim.api.nvim_create_autocmd({ 'BufWinEnter', 'BufEnter' }, {
-        group = neotree_exec,
-        pattern = '*',
-        callback = function()
-          if vim.bo.filetype == 'neo-tree' then
-            vim.wo.relativenumber = true
-          end
-        end,
-      })
+      require('oil').setup()
     end,
   },
+
+  -- {
+  --   -- File tree
+  --   'nvim-neo-tree/neo-tree.nvim',
+  --   branch = 'v3.x',
+  --   dependencies = {
+  --     'nvim-lua/plenary.nvim',
+  --     'nvim-tree/nvim-web-devicons',
+  --     'MunifTanjim/nui.nvim',
+  --     'xiyaowong/transparent.nvim',
+  --     'rmehri01/onenord.nvim',
+  --   },
+  --   config = function()
+  --     -- Transparent background
+  --     vim.g.transparent_groups = vim.list_extend(vim.g.transparent_groups or {}, { 'NeoTreeNormal', 'NeoTreeNormalNC' })
+  --     -- Easier-to-see texts
+  --     local onenord = require 'onenord.colors.onenord'
+  --     vim.api.nvim_set_hl(0, 'NeoTreeFileStats', { fg = onenord.light_gray })
+  --     vim.api.nvim_set_hl(0, 'NeoTreeFileStatsHeader', { fg = onenord.light_green })
+  --     vim.api.nvim_set_hl(0, 'NeoTreeMessage', { fg = onenord.dark_blue })
+  --     vim.api.nvim_set_hl(0, 'NeoTreeDotfile', { fg = onenord.gray })
+  --
+  --     -- Run setup here
+  --     require('neo-tree').setup {
+  --       window = {
+  --         position = 'current',
+  --       },
+  --       filesystem = {
+  --         hijack_netrw_behavior = 'open_current',
+  --       },
+  --     }
+  --
+  --     vim.api.nvim_create_user_command('E', function()
+  --       vim.cmd 'Neotree'
+  --     end, { desc = 'Open file [E]xplorer ' })
+  --
+  --     -- Autocmds to run whenever neo-tree starts
+  --     local neotree_exec = 'NeotreeExec'
+  --     vim.api.nvim_create_augroup(neotree_exec, { clear = true })
+  --     -- Enable rnu in neo-tree
+  --     vim.api.nvim_create_autocmd({ 'BufWinEnter', 'BufEnter' }, {
+  --       group = neotree_exec,
+  --       pattern = '*',
+  --       callback = function()
+  --         if vim.bo.filetype == 'neo-tree' then
+  --           vim.wo.relativenumber = true
+  --         end
+  --       end,
+  --     })
+  --   end,
+  -- },
 
   {
     -- Undotree
