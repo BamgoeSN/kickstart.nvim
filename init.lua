@@ -178,16 +178,16 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- Terminal
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 vim.keymap.set({ 'n', 'v' }, '<leader>tt', '<cmd>terminal<cr>', { desc = '[T]erminal mode' })
-vim.keymap.set({ 'n', 'v' }, '<leader>tv', '<cmd>vsp<cr> <C-w><C-l> <cmd>terminal<cr>G', { desc = '[T]erminal as [V]ertical split' })
-vim.keymap.set({ 'n', 'v' }, '<leader>th', '<cmd>split<cr> <C-w><C-j> <cmd>terminal<cr> 10<C-w>-G', { desc = '[T]erminal as [H]orizontal split' })
+vim.keymap.set({ 'n', 'v' }, '<leader>tsv', '<cmd>vsp<cr> <C-w><C-l> <cmd>terminal<cr>G', { desc = '[T]erminal [S]plit [V]ertical' })
+vim.keymap.set({ 'n', 'v' }, '<leader>tsh', '<cmd>split<cr> <C-w><C-j> <cmd>terminal<cr> 10<C-w>-G', { desc = '[T]erminal [S]plit [H]orizontal' })
 
--- [[ Competitest ]]
+-- Competitest
 vim.keymap.set('n', '<leader>tr', ':CompetiTest run <CR>', { desc = '[T]estcases [R]un' })
 vim.keymap.set('n', '<leader>ta', ':CompetiTest add_testcase <CR>', { desc = '[T]estcases [A]dd' })
 vim.keymap.set('n', '<leader>te', ':CompetiTest edit_testcase <CR>', { desc = '[T]estcases [E]dit' })
 vim.keymap.set('n', '<leader>td', ':CompetiTest delete_testcase <CR>', { desc = '[T]estcases [D]elete' })
 vim.keymap.set('n', '<leader>tg', ':CompetiTest receive testcases <CR>', { desc = '[T]estcases [G]et' })
-vim.keymap.set('n', '<leader>ts', ':CompetiTest show_ui <CR>', { desc = '[T]estcases [S]how previous UI' })
+vim.keymap.set('n', '<leader>tp', ':CompetiTest show_ui <CR>', { desc = '[T]estcases show [P]revious UI' })
 
 -- TIP: Disable arrow keys in normal mode
 vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -199,10 +199,14 @@ vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 --  Use CTRL+<hjkl> to switch between windows
 --
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+vim.keymap.set('n', '<leader>>', '10<C-w>>', { desc = 'Increase width by 10' })
+vim.keymap.set('n', '<leader><', '10<C-w><', { desc = 'Decrease width by 10' })
+vim.keymap.set('n', '<leader>+', '10<C-w>+', { desc = 'Increase height by 10' })
+vim.keymap.set('n', '<leader>-', '10<C-w>-', { desc = 'Decrease height by 10' })
+-- vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+-- vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+-- vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+-- vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -518,8 +522,6 @@ require('lazy').setup({
 
           -- The following code creates a keymap to toggle inlay hints in your
           -- code, if the language server you are using supports them
-          --
-          -- This may be unwanted, since they displace some of your code
           if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
             map('<leader>th', function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
@@ -577,8 +579,15 @@ require('lazy').setup({
         rust_analyzer = {
           settings = {
             ['rust-analyzer'] = {
+              -- https://github.com/rust-lang/rust-analyzer/blob/master/docs/user/generated_config.adoc
+              -- https://rust-analyzer.github.io/manual.html#configuration
               diagnostics = {
                 enable = true,
+              },
+              inlayHints = {
+                lifetimeElisionHints = {
+                  enable = "skip_trivial", -- "never" | "skip_trivial" | "always"
+                },
               },
               rustfmt = {
                 extraArgs = { '+nightly' },
