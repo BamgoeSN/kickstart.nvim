@@ -586,7 +586,7 @@ require('lazy').setup({
               },
               inlayHints = {
                 lifetimeElisionHints = {
-                  enable = "skip_trivial", -- "never" | "skip_trivial" | "always"
+                  enable = 'skip_trivial', -- "never" | "skip_trivial" | "always"
                 },
               },
               rustfmt = {
@@ -815,7 +815,16 @@ require('lazy').setup({
       vim.api.nvim_create_user_command('E', function()
         vim.cmd 'Oil'
       end, { desc = 'Open file [E]xplorer ' })
-      require('oil').setup()
+      require('oil').setup {
+        view_options = {
+          delete_to_trash = true,
+          case_insensitive = true,
+          sort = {
+            { 'type', 'asc' },
+            { 'name', 'asc' },
+          },
+        },
+      }
     end,
   },
 
