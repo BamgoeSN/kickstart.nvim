@@ -177,9 +177,11 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 
 -- Terminal
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-vim.keymap.set({ 'n', 'v' }, '<leader>tt', '<cmd>terminal<cr>', { desc = '[T]erminal mode' })
-vim.keymap.set({ 'n', 'v' }, '<leader>tsv', '<cmd>vsp<cr> <C-w><C-l> <cmd>terminal<cr>G', { desc = '[T]erminal [S]plit [V]ertical' })
-vim.keymap.set({ 'n', 'v' }, '<leader>tsh', '<cmd>split<cr> <C-w><C-j> <cmd>terminal<cr> 10<C-w>-G', { desc = '[T]erminal [S]plit [H]orizontal' })
+vim.keymap.set({ 'n', 'v' }, '<leader>tt', ":term <CR>", { desc = '[T]erminal mode' })
+vim.keymap.set({ 'n', 'v' }, '<leader>tsv', ":vsp | term <CR>", { desc = '[T]erminal [S]plit [V]ertical' })
+vim.keymap.set({ 'n', 'v' }, '<leader>tsh', ":sp | term <CR>", { desc = '[T]erminal [S]plit [H]orizontal' })
+-- vim.keymap.set({ 'n', 'v' }, '<leader>tsv', '<cmd>vsp<cr> <C-w><C-l> <cmd>terminal<cr>G', { desc = '[T]erminal [S]plit [V]ertical' })
+-- vim.keymap.set({ 'n', 'v' }, '<leader>tsh', '<cmd>split<cr> <C-w><C-j> <cmd>terminal<cr> 10<C-w>-G', { desc = '[T]erminal [S]plit [H]orizontal' })
 
 -- Competitest
 vim.keymap.set('n', '<leader>tr', ':CompetiTest run <CR>', { desc = '[T]estcases [R]un' })
@@ -271,7 +273,7 @@ require('lazy').setup({
         { '<leader>r', group = '[R]ename' },
         { '<leader>s', group = '[S]earch' },
         { '<leader>w', group = '[W]orkspace' },
-        { '<leader>t', group = '[T]oggle' },
+        { '<leader>t', group = '[T]estcases / [T]erminal' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
       }
     end,
