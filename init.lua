@@ -1,55 +1,7 @@
 -- kickstart.nvim
 
 -- [[ Utility funcitons ]]
--- Returns a list of loaded buffers
-local function list_loaded_bufs()
-  local bufs = vim.api.nvim_list_bufs()
-  local loaded = {}
-  for _, bufnr in ipairs(bufs) do
-    if vim.api.nvim_buf_get_option(bufnr, 'buflisted') then
-      table.insert(loaded, bufnr)
-    end
-  end
-  return loaded
-end
-
--- Returns a function which picks a given index of buffer
-local function get_buf_picker(index)
-  local loaded = list_loaded_bufs()
-  return function()
-    local bufnr = loaded[index]
-    if bufnr ~= nil then
-      vim.api.nvim_set_current_buf(bufnr)
-    end
-  end
-end
-
--- Returns true on plain Windows
--- Returns false on WSL or plain Linux
-local function is_on_windows()
-  return string.find(vim.loop.os_uname().sysname, 'Windows') ~= nil
-end
-
--- Returns true on WSL
--- Returns false on plain Windows or Linux
-local function is_on_wsl()
-  return string.find(vim.loop.os_uname().release, 'microsoft') ~= nil
-end
-
--- Automatically executes `git pull --rebase` on the config directory.
--- More accurately, it executes the command on the first directory of runtime paths.
-local function update_config()
-  local runtime_paths = vim.api.nvim_list_runtime_paths()
-  local dir = runtime_paths[1]
-  local git = vim.fn.expand(dir .. '/.git')
-  if vim.fn.isdirectory(git) == 1 then
-    local cmd = string.format('cd %s && git pull --rebase', vim.fn.shellescape(dir))
-    print('Executing ' .. cmd)
-    local output = vim.fn.system(cmd)
-    print(output)
-  end
-end
-vim.api.nvim_create_user_command('UpdateConfig', update_config, { desc = { 'Updates neovim config' } })
+local utils = require 'bamgoesn.utils'
 
 -- [[ Options ]]
 -- Set <space> as the leader key
@@ -145,7 +97,7 @@ vim.keymap.set({ 'n', 'v' }, ']b', '<cmd> bn <cr>', { desc = 'Go to the next [B]
 vim.keymap.set({ 'n', 'v' }, '[b', '<cmd> bp <cr>', { desc = 'Go to the previous [B]uffer', silent = true })
 for i = 1, 9 do
   vim.keymap.set({ 'n', 'v' }, '<leader>' .. i, function()
-    local bufs = list_loaded_bufs()
+    local bufs = utils.list_loaded_bufs()
     local bufnr = bufs[i]
     if bufnr ~= nil then
       vim.api.nvim_set_current_buf(bufnr)
@@ -224,8 +176,11 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- Config updater command
+vim.api.nvim_create_user_command('UpdateConfig', utils.update_config, { desc = { 'Updates neovim config' } })
+
 -- Load plugins via lazy.vim
-require('bamgoesn.plugins')
+require 'bamgoesn.plugins'
 
 -- [[ Neovide ]]
 if vim.g.neovide then
@@ -242,7 +197,7 @@ if vim.g.neovide then
   vim.g.neovide_cursor_vfx_particle_density = 10.0
 
   -- Smaller font size if on Windows or on WSL
-  if is_on_windows() or is_on_wsl() then
+  if utils.is_on_windows() or utils.is_on_wsl() then
     -- vim.g.neovide_transparency = 0.85
     Fsize = 12
     vim.o.guifont = 'FiraCode Nerd Font:h' .. Fsize
