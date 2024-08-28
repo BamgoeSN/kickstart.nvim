@@ -3,7 +3,7 @@ return {
   -- event = { 'TextChanged', 'ModeChanged' },
   dependencies = { 'nvim-lua/plenary.nvim' },
   config = function()
-    require('kickstart.keylogger').setup()
+    require('bamgoesn.keylogger').setup()
     require('lualine').setup {
       options = {
         icons_enabled = true,
@@ -19,7 +19,7 @@ return {
         lualine_y = { 'progress', 'location' },
         lualine_z = {
           function()
-            return require('kickstart.keylogger').str
+            return require('bamgoesn.keylogger').str
           end,
         },
       },

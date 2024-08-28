@@ -2,7 +2,7 @@ M = {}
 
 -- Convert keystroke argument into a prettier form to print
 -- <M-x> are registered as if its coming after Esc without Alt, so <M-x> is fundamentally indistinguishable from <Esc>x only from key chars.
-local convert = require('kickstart.keylogger.convert').convert
+local convert = require('bamgoesn.keylogger.convert').convert
 
 function M.setup(opt)
   local default_opt = {
