@@ -1,3 +1,5 @@
+-- Grab `keylogger.str` for keystrokes
+
 M = {}
 
 -- Convert keystroke argument into a prettier form to print
