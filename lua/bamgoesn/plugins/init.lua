@@ -33,10 +33,10 @@ require('lazy').setup({
   require 'bamgoesn.plugins.lspconfig',
 
   -- Autoformat with conform.nvim
-  require 'bamgoesn.plugins.autoformat',
+  require 'bamgoesn.plugins.conform',
 
   -- Autocompletion
-  require 'bamgoesn.plugins.autocompletion',
+  require 'bamgoesn.plugins.nvim-cmp',
 
   -- Theme
   require 'bamgoesn.plugins.theme',
@@ -75,13 +75,13 @@ require('lazy').setup({
   require 'bamgoesn.plugins.gitsigns',
 
   -- Debug adapter
-  require 'bamgoesn.plugins.debug',
+  require 'bamgoesn.plugins.nvim-dap',
 
   -- Indent line
-  require 'bamgoesn.plugins.indent_line',
+  require 'bamgoesn.plugins.indent_blankline',
 
   -- Asynchronous lint
-  require 'bamgoesn.plugins.lint',
+  require 'bamgoesn.plugins.nvim-lint',
 
   -- Contest companion
   require 'bamgoesn.plugins.competitest',
