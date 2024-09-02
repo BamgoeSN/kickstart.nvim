@@ -80,6 +80,9 @@ require('lazy').setup({
   -- Indent line
   require 'bamgoesn.plugins.indent_blankline',
 
+  -- Outline of the code file
+  require 'bamgoesn.plugins.outline',
+
   -- Asynchronous lint
   require 'bamgoesn.plugins.nvim-lint',
 
