@@ -26,11 +26,11 @@ function M.setup(opt)
   M.keylog = Deque.new()
   M.maxlog = default_opt.maxlog
   M.strmax = default_opt.strmax
-  M.str = ""
+  M.str = ''
 
   vim.on_key(function(key)
     local display = convert(key)
-    if display ~= nil and display:len() >= 1 and vim.fn.mode() ~= "t" then
+    if display ~= nil and display:len() >= 1 and vim.fn.mode() ~= 't' then
       M.keylog:pushright(display)
     end
 
@@ -39,15 +39,15 @@ function M.setup(opt)
     end
 
     local aimlen = M.strmax()
-    M.str = ""
+    M.str = ''
     for _, v in M.keylog:ipairs_left() do
-      M.str = M.str .. " " .. v
+      M.str = M.str .. ' ' .. v
     end
     while M.str:len() < aimlen do
-      M.str = M.str .. " "
+      M.str = M.str .. ' '
     end
     M.str = M.str:sub(M.str:len() + 1 - aimlen, M.str:len())
-    M.str = M.str:gsub("%%", "%%%%")
+    M.str = M.str:gsub('%%', '%%%%')
   end)
 end
 

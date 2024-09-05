@@ -33,7 +33,7 @@ end
 -- Pop a value from the front of a queue.
 function Deque:pop_front()
   if self:is_empty() then
-    error("Attempted to pop_front on an empty queue")
+    error 'Attempted to pop_front on an empty queue'
   end
   local value = self[self.first]
   self[self.first] = nil
@@ -45,7 +45,7 @@ end
 -- Pop a value from the back of a queue.
 function Deque:pop_back()
   if self:is_empty() then
-    error("Attempted to pop_back on an empty queue")
+    error 'Attempted to pop_back on an empty queue'
   end
   self.back = self.back - 1
   local value = self[self.back]
@@ -57,7 +57,7 @@ end
 -- Get the front value of a queue.
 function Deque:get_front()
   if self:is_empty() then
-    error("Attempted to get_front on an empty queue")
+    error 'Attempted to get_front on an empty queue'
   end
   return self[self.first]
 end
@@ -65,7 +65,7 @@ end
 -- Get the front value of a queue.
 function Deque:get_back()
   if self:is_empty() then
-    error("Attempted to get_back on an empty queue")
+    error 'Attempted to get_back on an empty queue'
   end
   return self[self.back - 1]
 end

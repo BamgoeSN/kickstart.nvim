@@ -8,6 +8,6 @@ return {
   opts = {
     outline_window = {
       auto_jump = true,
-    }
+    },
   },
 }
