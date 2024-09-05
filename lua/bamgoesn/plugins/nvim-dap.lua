@@ -26,6 +26,7 @@ return {
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
+    'mfussenegger/nvim-dap-python',
   },
   keys = function(_, keys)
     local dap = require 'dap'
@@ -71,6 +72,7 @@ return {
         'delve',
         'codelldb',
         'cpptools',
+        'debugpy',
       },
     }
 
@@ -108,6 +110,11 @@ return {
         detached = vim.fn.has 'win32' == 0,
       },
     }
+
+    -- Python config
+    require('dap-python').setup 'python'
+    -- If using the above, then `python -m debugpy --version`
+    -- must work in the shell
 
     -- Rust config
     -- https://kurotych.com/posts/rust_neovim_debugger/
