@@ -3,7 +3,6 @@
 local utils = require 'bamgoesn.utils'
 
 -- Clear highlights on search when pressing <Esc> in normal mode
---  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Buffers
@@ -48,8 +47,6 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 vim.keymap.set({ 'n', 'v' }, '<leader>tt', ':term <CR>', { desc = '[T]erminal mode' })
 vim.keymap.set({ 'n', 'v' }, '<leader>tsv', ':vsp | term <CR>', { desc = '[T]erminal [S]plit [V]ertical' })
 vim.keymap.set({ 'n', 'v' }, '<leader>tsh', ':15sp | term <CR>', { desc = '[T]erminal [S]plit [H]orizontal' })
--- vim.keymap.set({ 'n', 'v' }, '<leader>tsv', '<cmd>vsp<cr> <C-w><C-l> <cmd>terminal<cr>G', { desc = '[T]erminal [S]plit [V]ertical' })
--- vim.keymap.set({ 'n', 'v' }, '<leader>tsh', '<cmd>split<cr> <C-w><C-j> <cmd>terminal<cr> 10<C-w>-G', { desc = '[T]erminal [S]plit [H]orizontal' })
 
 -- Competitest
 vim.keymap.set('n', '<leader>tr', ':CompetiTest run <CR>', { desc = '[T]estcases [R]un' })
@@ -65,18 +62,11 @@ vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
 vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
--- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
---
---  See `:help wincmd` for a list of all window commands
+-- Keybinds to make split management easier.
 vim.keymap.set('n', '<leader>>', '10<C-w>>', { desc = 'Increase width by 10' })
 vim.keymap.set('n', '<leader><', '10<C-w><', { desc = 'Decrease width by 10' })
 vim.keymap.set('n', '<leader>+', '10<C-w>+', { desc = 'Increase height by 10' })
 vim.keymap.set('n', '<leader>-', '10<C-w>-', { desc = 'Decrease height by 10' })
--- vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
--- vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
--- vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
--- vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Config updater command
 vim.api.nvim_create_user_command('UpdateConfig', utils.update_config, { desc = { 'Updates neovim config' } })

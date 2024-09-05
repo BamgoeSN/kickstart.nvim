@@ -1,9 +1,9 @@
 return {
 
+  -- Onenord theme
+  -- neo-tree explicitly depends on this colorscheme.
+  -- Make sure to modify it whenever changing the colorscheme.
   {
-    -- Onenord theme
-    -- neo-tree explicitly depends on this colorscheme.
-    -- Make sure to modify it whenever changing the colorscheme.
     'rmehri01/onenord.nvim',
     priority = 1000,
     opts = {
@@ -11,8 +11,8 @@ return {
     },
   },
 
+  -- Transparent background
   {
-    -- Transparent background
     'xiyaowong/transparent.nvim',
     config = function()
       vim.cmd ':TransparentEnable'
