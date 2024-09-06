@@ -99,6 +99,9 @@ require('lazy').setup({
     end,
   },
 
+  -- Remote SSH
+  require 'bamgoesn.plugins.remote-sshfs',
+
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
   --
