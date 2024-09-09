@@ -27,7 +27,7 @@ return {
       rust = { 'rustfmt' },
       cpp = { 'clangd' },
       -- python = { "isort", "black" },
-      -- javascript = { "prettierd", "prettier", stop_after_first = true },
+      javascript = { "prettierd", "prettier", stop_after_first = true },
     },
   },
 }
