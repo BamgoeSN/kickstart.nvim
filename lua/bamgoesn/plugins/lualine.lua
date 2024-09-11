@@ -1,9 +1,25 @@
 return {
   'nvim-lualine/lualine.nvim',
   -- event = { 'TextChanged', 'ModeChanged' },
-  dependencies = { 'nvim-lua/plenary.nvim' },
+  dependencies = {
+    'nvim-lua/plenary.nvim',
+
+    -- Key viewer
+    {
+      'NStefan002/screenkey.nvim',
+      opts = {
+        clear_after = 999999999999999,
+        disable = {
+          buftypes = { 'terminal' },
+        },
+        show_leader = false,
+        group_mappings = true,
+      },
+    },
+  },
   config = function()
-    require('bamgoesn.keylogger').setup()
+    vim.g.screenkey_statusline_component = true
+    -- require('bamgoesn.keylogger').setup()
     require('lualine').setup {
       options = {
         icons_enabled = true,
@@ -16,12 +32,14 @@ return {
         globalstatus = true,
       },
       sections = {
-        lualine_y = { 'progress', 'location' },
-        lualine_z = {
+        lualine_x = {
           function()
-            return require('bamgoesn.keylogger').str
+            return require('screenkey').get_keys()
+            -- return require('bamgoesn.keylogger').str
           end,
         },
+        lualine_y = { 'encoding', 'fileformat', 'filetype' },
+        lualine_z = { 'progress', 'location' },
       },
       tabline = {
         lualine_b = {
