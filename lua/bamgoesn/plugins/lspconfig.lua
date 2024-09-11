@@ -124,7 +124,7 @@ return {
         },
       },
 
-      ts_ls = {},
+      tsserver = {},
     },
 
     -- Ensure the servers and tools above are installed
