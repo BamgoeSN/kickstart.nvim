@@ -34,7 +34,7 @@ return {
       sections = {
         lualine_x = {
           function()
-            return require('screenkey').get_keys()
+            return require('screenkey').get_keys():gsub('%%', '%%%%')
             -- return require('bamgoesn.keylogger').str
           end,
         },
