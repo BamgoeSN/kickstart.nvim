@@ -6,8 +6,6 @@ local utils = require 'bamgoesn.utils'
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Buffers
--- vim.keymap.set({ 'n', 'v' }, '<leader>bn', '<cmd> bn <cr>', { desc = '[B]uffer [N]ext', silent = true })
--- vim.keymap.set({ 'n', 'v' }, '<leader>bp', '<cmd> bp <cr>', { desc = '[B]uffer [P]revious', silent = true })
 vim.keymap.set({ 'n', 'v' }, ']b', '<cmd> bn <cr>', { desc = 'Go to the next [B]uffer', silent = true })
 vim.keymap.set({ 'n', 'v' }, '[b', '<cmd> bp <cr>', { desc = 'Go to the previous [B]uffer', silent = true })
 for i = 1, 9 do
@@ -44,17 +42,17 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 
 -- Terminal
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-vim.keymap.set({ 'n', 'v' }, '<leader>tt', ':term <CR>', { desc = '[T]erminal mode' })
-vim.keymap.set({ 'n', 'v' }, '<leader>tsv', ':vsp | term <CR>', { desc = '[T]erminal [S]plit [V]ertical' })
-vim.keymap.set({ 'n', 'v' }, '<leader>tsh', ':15sp | term <CR>', { desc = '[T]erminal [S]plit [H]orizontal' })
+vim.keymap.set({ 'n', 'v' }, '<leader>tt', '<cmd> term <CR>', { desc = '[T]erminal mode' })
+vim.keymap.set({ 'n', 'v' }, '<leader>tsv', '<cmd> vsp | term <CR>', { desc = '[T]erminal [S]plit [V]ertical' })
+vim.keymap.set({ 'n', 'v' }, '<leader>tsh', '<cmd> 15sp | term <CR>', { desc = '[T]erminal [S]plit [H]orizontal' })
 
 -- Competitest
-vim.keymap.set('n', '<leader>tr', ':CompetiTest run <CR>', { desc = '[T]estcases [R]un' })
-vim.keymap.set('n', '<leader>ta', ':CompetiTest add_testcase <CR>', { desc = '[T]estcases [A]dd' })
-vim.keymap.set('n', '<leader>te', ':CompetiTest edit_testcase <CR>', { desc = '[T]estcases [E]dit' })
-vim.keymap.set('n', '<leader>td', ':CompetiTest delete_testcase <CR>', { desc = '[T]estcases [D]elete' })
-vim.keymap.set('n', '<leader>tg', ':CompetiTest receive testcases <CR>', { desc = '[T]estcases [G]et' })
-vim.keymap.set('n', '<leader>tp', ':CompetiTest show_ui <CR>', { desc = '[T]estcases show [P]revious UI' })
+vim.keymap.set('n', '<leader>tr', '<cmd> CompetiTest run <CR>', { desc = '[T]estcases [R]un' })
+vim.keymap.set('n', '<leader>ta', '<cmd> CompetiTest add_testcase <CR>', { desc = '[T]estcases [A]dd' })
+vim.keymap.set('n', '<leader>te', '<cmd> CompetiTest edit_testcase <CR>', { desc = '[T]estcases [E]dit' })
+vim.keymap.set('n', '<leader>td', '<cmd> CompetiTest delete_testcase <CR>', { desc = '[T]estcases [D]elete' })
+vim.keymap.set('n', '<leader>tg', '<cmd> CompetiTest receive testcases <CR>', { desc = '[T]estcases [G]et' })
+vim.keymap.set('n', '<leader>tp', '<cmd> CompetiTest show_ui <CR>', { desc = '[T]estcases show [P]revious UI' })
 
 -- TIP: Disable arrow keys in normal mode
 vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
