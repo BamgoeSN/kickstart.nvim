@@ -98,7 +98,6 @@ local function convert(key)
   end
   return convert_table[key]
 end
-
 M.convert = convert
 
 return M
