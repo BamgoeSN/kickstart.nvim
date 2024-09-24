@@ -52,7 +52,7 @@ return {
     vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
     vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
     vim.keymap.set('n', '<leader>sa', function()
-      builtin.find_files { no_ignore = true, no_ignore_parent = true }
+      builtin.find_files { hidden = true, no_ignore = true, no_ignore_parent = true }
     end, { desc = '[S]earch [A]ll Files' })
     vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
     vim.keymap.set('n', '<leader>sl', builtin.lsp_document_symbols, { desc = '[S]earch [L]SP Document Symbols' })
