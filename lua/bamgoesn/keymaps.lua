@@ -1,5 +1,4 @@
 --  See `:help vim.keymap.set()`
-
 local utils = require 'bamgoesn.utils'
 
 -- Clear highlights on search when pressing <Esc> in normal mode
